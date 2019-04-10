@@ -60,10 +60,12 @@ $ touch webpack.config.js
 ```
 打開 webpack.config.js 增加以下內容
 ```js
+const Path = require('path');
+
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: __dirname + '/dist',
+    path: Path.join(__dirname, '/dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -110,6 +112,8 @@ package.json
 </pre>
 webpack.config.js
 <pre>
+const Path = require('path');
+
 module.exports = {
   entry: './src/index.js',
   <b>module: {
@@ -125,7 +129,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx']
   },</b>
   output: {
-    path: __dirname + '/dist',
+    path: Path.join(__dirname, '/dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -159,6 +163,7 @@ $ npm i -D react-hot-loader
 修改 webpack.config.js
 <pre>
 <b>const Webpack = require('webpack');</b>
+const Path = require('path');
 
 module.exports = {
   entry: './src/index.js',
@@ -175,7 +180,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx']
   },
   output: {
-    path: __dirname + '/dist',
+    path: Path.join(__dirname, '/dist'),
     publicPath: '/',
     filename: 'bundle.js'
   },
