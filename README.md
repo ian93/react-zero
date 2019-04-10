@@ -9,18 +9,21 @@
 * [React-Webpack-Babel](https://www.robinwieruch.de/minimal-react-webpack-babel-setup/)
 * [ESLint-Prettier](http://eddychang.me/react-native-eslint-prettier/)
 
+<br />
+
+## Installation
+
 #### 建立 npm 環境
 ```shell
 $ mkdir react-zero && cd react-zero
 $ npm init -y
 ```
 
-#### 建立 index.html
+#### 建立 _index.html_
 ```shell
 $ mkdir dist && touch dist/index.html
 ```
-
-#### 編輯 dist/index.html
+編輯 _dist/index.html_
 ```html
 <!DOCTYPE html>
 <html lang="en">
@@ -43,7 +46,7 @@ $ npm install --save-dev webpack webpack-dev-server webpack-cli
 $ npm i -D webpack webpack-dev-server webpack-cli
 ```
 
-#### 調整 npm 的 package.json
+#### 調整 npm 的 _package.json_
 在 script 區塊增加 npm start 的設定
 <pre>
 ...
@@ -54,11 +57,11 @@ $ npm i -D webpack webpack-dev-server webpack-cli
 ...
 </pre>
 
-#### 新增 Webpack 設定檔
+#### 建立 Webpack 設定檔
 ```shell
 $ touch webpack.config.js
 ```
-打開 webpack.config.js 增加以下內容
+打開 _webpack.config.js_ 增加以下內容
 ```js
 const Path = require('path');
 
@@ -80,7 +83,7 @@ module.exports = {
 $ mkdir src
 $ touch src/index.jsx
 ```
-在 index.jsx 裡增加以下內容
+在 _index.jsx_ 裡增加以下內容
 ```js
 console.log('My Minimal React Webpack Babel Setup');
 ```
@@ -95,7 +98,7 @@ $ npm i -D @babel/preset-react babel-loader
 ```
 
 #### 修改設定讓 Webpack 能正確打包編譯
-package.json
+_package.json_
 <pre>
 ...
 "keywords": [],
@@ -110,7 +113,7 @@ package.json
 "devDependencies": {
 ...
 </pre>
-webpack.config.js
+_webpack.config.js_
 <pre>
 const Path = require('path');
 
@@ -143,7 +146,7 @@ module.exports = {
 ```shell
 $ npm i --save react react-dom
 ```
-修改 src/index.js
+修改 _src/index.js_
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -160,7 +163,7 @@ ReactDOM.render(
 ```shell
 $ npm i -D react-hot-loader
 ```
-修改 webpack.config.js
+修改 _webpack.config.js_
 <pre>
 <b>const Webpack = require('webpack');</b>
 const Path = require('path');
@@ -189,12 +192,12 @@ module.exports = {
   ],</b>
   devServer: {
     contentBase: './dist',
-    <b>hot: true<b>
+    <b>hot: true</b>
   }
 };
 </pre>
 
-#### 修改 src/index.js
+#### 修改 _src/index.js_
 ```js
 // 在文件尾端加上
 module.hot.accept();
@@ -202,15 +205,16 @@ module.hot.accept();
 
 #### 啟動 webpack-dev-server
 ```shell
-$ npm start    # 網址預設是 http://localhost:8080/
+$ npm start   # 網址預設是 http://localhost:8080/
 ```
 
+<br /><br />
 
 ## ESLint 設定
 
 #### 安裝 eslint
 ```shell
-$ npm i -D eslint eslint-plugin-import eslint-plugin-jsx-a11y 
+$ npm i -D eslint eslint-plugin-import eslint-plugin-jsx-a11y
 ```
 安裝 babel 的 eslint 支援套件
 ```shell
@@ -234,3 +238,32 @@ The config that you've selected requires the following dependencies:
 eslint-plugin-react@latest eslint-config-airbnb@latest
 ? Would you like to install them now with npm? Yes
 ```
+
+#### 修改 _.eslintrc.js_, 使用 babel-eslint 作為 parser
+<pre>
+module.exports = {
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
+  },
+  extends: 'airbnb',
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  <b>parser: "babel-eslint",</b>
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 2018,
+    sourceType: 'module',
+  },
+  plugins: [
+    'react',
+  ],
+  rules: {
+  },
+};
+</pre>
