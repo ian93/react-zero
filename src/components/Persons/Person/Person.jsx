@@ -1,27 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import classes from './Person.css';
+import withClass from '../../../hoc/withClass';
+import Aux from '../../../hoc/Aux';
 
-const person = (props) => {
+import './Person.css';
+
+class Person extends Component {
   // const prob = Math.random();
   // if (prob > 0.8) {
   //     throw new Error('Something wrong.');
   // }
-  console.log('[Person.js] rendering Person');
 
-  return (
-    <div className="Person">
-      <p onClick={props.click}>
-        I&apos;m&nbsp;
-        { props.name }
-        , and I&apos;m&nbsp;
-        { props.age }
-        &nbsp;years old!
-      </p>
-      <p>{ props.children }</p>
-      <input type="text" onChange={props.change} value={props.name} />
-    </div>
-  );
-};
+  render() {
+    this.console.log('[Person.js] rendering Person');
+    return (
+      <Aux>
+        <p onClick={this.props.click}>
+          I&apos;m&nbsp;
+          { this.props.name }
+          , and I&apos;m&nbsp;
+          { this.props.age }
+          &nbsp;years old!
+        </p>
+        <p>{ this.props.children }</p>
+        <input type="text" onChange={this.props.change} value={this.props.name} />
+      </Aux>
+    );
+  }
+}
 
-export default person;
+export default withClass(Person, 'Person');
