@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import withClass from '../../../hoc/withClass';
 import Aux from '../../../hoc/Aux';
@@ -11,8 +12,11 @@ class Person extends Component {
   //     throw new Error('Something wrong.');
   // }
 
+  // Make ESLint believe this should be functional component, not class component.
+  fakeFuncForESLint = () => {}
+
   render() {
-    this.console.log('[Person.js] rendering Person');
+    console.log('[Person.js] rendering Person');
     return (
       <Aux>
         <p onClick={this.props.click}>
@@ -28,5 +32,19 @@ class Person extends Component {
     );
   }
 }
+
+Person.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.number,
+  click: PropTypes.func,
+  change: PropTypes.func,
+};
+
+Person.defaultProps = {
+  name: 'Ian',
+  age: 30,
+  click: () => {},
+  change: () => {},
+};
 
 export default withClass(Person, 'Person');

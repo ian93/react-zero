@@ -61,9 +61,9 @@ class App extends Component {
   }
 
   togglePersonsHandler = () => {
-    const boo = this.state.showPersons;
+    // const boo = this.state.showPersons;
 
-    this.setState({ showPersons: !boo });
+    this.setState(prevState => ({ showPersons: !prevState.showPersons }));
   }
 
   inputChangedHandler = (event) => {
