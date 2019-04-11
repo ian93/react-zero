@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Cockpit from '../components/Cockpit/Cockpit';
 import Persons from '../components/Persons/Persons';
 
-import classes from './App.css';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -19,25 +19,26 @@ class App extends Component {
     ],
     showPersons: false,
     showCockpit: true,
+    inputText: '',
   }
 
-  // static getDerivedStateFromProps(props, state) {
-  //   console.log('[App.js] getDerivedStateFromProps', props);
-  //   return state;
-  // }
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
 
-  // componentDidMount() {
-  //   console.log('[App.js] componentDidMount');
-  // }
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
 
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log('[App.js] shouldComponentUpdate');
-  //   return true;
-  // }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
 
-  // componentDidUpdate() {
-  //   console.log('[App.js] componentDidUpdate');
-  // }
+  componentDidUpdate() {
+    console.log('[App.js] componentDidUpdate');
+  }
 
   deletePersonHandler = (personIndex) => {
     const persons = [...this.state.persons];
@@ -63,6 +64,19 @@ class App extends Component {
     this.setState({ showPersons: !boo });
   }
 
+  inputChangedHandler = (event) => {
+    const text = event.target.value;
+
+    this.setState({ inputText: text });
+  }
+
+  charDeleteHandler = (index) => {
+    const text = [...this.state.inputText];
+    text.splice(index, 1);
+
+    this.setState({ inputText: text.join('') });
+  }
+
   render() {
     let persons = null;
     if (this.state.showPersons) {
@@ -81,6 +95,9 @@ class App extends Component {
           showCockpit={this.state.showCockpit}
           title={this.props.appTitle}
           showPersons={this.state.showPersons}
+          input={this.state.inputText}
+          texted={this.inputChangedHandler}
+          delete={this.charDeleteHandler}
           clicked={this.togglePersonsHandler}
         />
       );

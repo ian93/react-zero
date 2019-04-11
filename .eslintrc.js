@@ -22,6 +22,7 @@ module.exports = {
   ],
   rules: {
     'no-console': 0,
+    'no-alert': 0,
     "no-unused-vars": 0,
     "react/no-array-index-key": 0,
     "react/destructuring-assignment": 0,

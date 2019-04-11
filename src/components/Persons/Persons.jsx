@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import Person from './Person/Person';
 
-class Persons extends Component {
+class Persons extends PureComponent {
   // static getDerivedStateFromProps(props, state) {
   //     console.log('[Persons.js] getDerivedStateFromProps', props);
   //     return state;
@@ -18,19 +18,19 @@ class Persons extends Component {
   //         ) ? false : true;
   // }
 
-  // componentDidUpdate(prevProps, prevState, snapshot) {
-  //   console.log('[Persons.js] componentDidUpdate');
-  //   console.log(snapshot);
-  // }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('[Persons.js] componentDidUpdate');
+    console.log(snapshot);
+  }
 
-  // componentWillUnmount() {
-  //   console.log('[Persons.js] componentWillUnmount');
-  // }
+  componentWillUnmount() {
+    console.log('[Persons.js] componentWillUnmount');
+  }
 
-  // getSnapshotBeforeUpdate(prevProps, prevState) {
-  //   this.console.log('[Persons.js] getSnapshotsBeforeUpdate');
-  //   return { message: 'Snapshot!' };
-  // }
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    console.log('[Persons.js] getSnapshotsBeforeUpdate');
+    return { message: 'Snapshot!' };
+  }
 
   render() {
     console.log('[Persons.js] rendering Persons ...');
