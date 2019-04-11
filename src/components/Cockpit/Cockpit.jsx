@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import TextValidator from '../TextValidator/TextValidator';
 import Char from '../CharBlock/CharBlock';
 
-import classes from './Cockpit.css';
+import './Cockpit.css';
 
 const cockpit = (props) => {
   useEffect(() => {
@@ -41,7 +41,7 @@ const cockpit = (props) => {
   let btnClass = '';
   let btnText = 'Show hidden persons.';
   if (props.showPersons) {
-    btnClass = classes.Red;
+    btnClass = 'Red';
     btnText = 'Hide persons.';
   }
 
