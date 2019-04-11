@@ -15,7 +15,7 @@
 
 #### 建立 npm 環境
 ```shell
-$ mkdir react-zero && cd react-zero
+$ mkdir react-from-zero && cd react-from-zero
 $ npm init -y
 ```
 
@@ -267,3 +267,13 @@ module.exports = {
   },
 };
 </pre>
+
+#### babel classProperty
+```shell
+$ npm i -D @babel/plugin-proposal-class-properties babel-eslint@9.0.0 eslint-plugin-flowtype@2.50.3
+```
+
+#### css-loader syle-loader
+```shell
+$ npm i -D css-loader style-loader
+```
