@@ -4,6 +4,7 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Persons from '../components/Persons/Persons';
 import withClass from '../hoc/withClass';
 import Aux from '../hoc/Aux';
+import AuthContext from '../context/auth-context';
 
 import './App.css';
 
@@ -18,12 +19,12 @@ class App extends Component {
     persons: [
       { id: 0, name: 'Max', age: 29 },
       { id: 1, name: 'Ian', age: 30 },
-      { id: 2, name: 'Joe', age: 25 },
+      { id: 2, name: 'Joe', age: 25 }
     ],
     showPersons: false,
     showCockpit: true,
-    inputText: '',
-  }
+    inputText: ''
+  };
 
   static getDerivedStateFromProps(props, state) {
     console.log('[App.js] getDerivedStateFromProps', props);
@@ -45,17 +46,19 @@ class App extends Component {
 
   loginHandler = () => {
     this.setState({ authenticated: true });
-  }
+  };
 
-  deletePersonHandler = (personIndex) => {
+  deletePersonHandler = personIndex => {
     const persons = [...this.state.persons];
     persons.splice(personIndex, 1);
 
     this.setState({ persons });
-  }
+  };
 
   nameChangedHandler = (event, personId) => {
-    const personIndex = this.state.persons.findIndex(person => person.id === personId);
+    const personIndex = this.state.persons.findIndex(
+      person => person.id === personId
+    );
     const person = { ...this.state.persons[personIndex] };
 
     person.name = event.target.value;
@@ -63,26 +66,26 @@ class App extends Component {
     persons[personIndex] = person;
 
     this.setState({ persons });
-  }
+  };
 
   togglePersonsHandler = () => {
     // const boo = this.state.showPersons;
 
     this.setState(prevState => ({ showPersons: !prevState.showPersons }));
-  }
+  };
 
-  inputChangedHandler = (event) => {
+  inputChangedHandler = event => {
     const text = event.target.value;
 
     this.setState({ inputText: text });
-  }
+  };
 
-  charDeleteHandler = (index) => {
+  charDeleteHandler = index => {
     const text = [...this.state.inputText];
     text.splice(index, 1);
 
     this.setState({ inputText: text.join('') });
-  }
+  };
 
   render() {
     let persons = null;
@@ -107,16 +110,29 @@ class App extends Component {
           texted={this.inputChangedHandler}
           delete={this.charDeleteHandler}
           clicked={this.togglePersonsHandler}
-          login={this.loginHandler}
         />
       );
     }
 
     return (
       <Aux>
-        <button type="button" onClick={() => { this.setState({ showCockpit: false }); }}>Remove Cockpit</button>
-        { cockpit }
-        { persons }
+        <button
+          type="button"
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler
+          }}
+        >
+          {cockpit}
+          {persons}
+        </AuthContext.Provider>
       </Aux>
     );
   }

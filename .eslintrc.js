@@ -4,7 +4,7 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: 'airbnb',
+  extends: ['airbnb', "prettier"],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: [
     "react",
+    "prettier"
   ],
   rules: {
     'no-console': 0,

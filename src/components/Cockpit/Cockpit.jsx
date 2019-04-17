@@ -1,12 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 
 import TextValidator from '../TextValidator/TextValidator';
 import Char from '../CharBlock/CharBlock';
+import AuthContext from '../../context/auth-context';
 
 import './Cockpit.css';
 
-const cockpit = (props) => {
+const cockpit = props => {
   const toggleBtnRef = useRef(null);
+  const authContext = useContext(AuthContext);
+
+  console.log(authContext.authenticated);
 
   useEffect(() => {
     console.log('[Cockpit.js] useEffect');
@@ -30,13 +34,8 @@ const cockpit = (props) => {
   if (props.input.length !== 0) {
     charBlock = (
       <div>
-        <TextValidator
-          length={props.input.length}
-        />
-        <Char
-          text={props.input}
-          click={props.delete}
-        />
+        <TextValidator length={props.input.length} />
+        <Char text={props.input} click={props.delete} />
       </div>
     );
   }
@@ -49,20 +48,27 @@ const cockpit = (props) => {
   }
 
   const assignedClasses = [];
-  if (props.input.length < 5) { assignedClasses.push('red'); }
-  if (props.input.length < 3) { assignedClasses.push('bold'); }
+  if (props.input.length < 5) {
+    assignedClasses.push('red');
+  }
+  if (props.input.length < 3) {
+    assignedClasses.push('bold');
+  }
 
   return (
     <div className="Cockpit">
-      <h1>{ props.title }</h1>
+      <h1>{props.title}</h1>
       <p className={assignedClasses.join(' ')}>Input text</p>
-      <input type="text" onChange={(event) => { props.texted(event); }} value={props.input} />
-      { charBlock }
+      <input
+        type="text"
+        onChange={event => {
+          props.texted(event);
+        }}
+        value={props.input}
+      />
+      {charBlock}
       <div>
-        <button
-          type="button"
-          onClick={props.login}
-        >
+        <button type="button" onClick={authContext.login}>
           Login
         </button>
       </div>
@@ -73,7 +79,7 @@ const cockpit = (props) => {
           className={btnClass}
           onClick={props.clicked}
         >
-          { btnText }
+          {btnText}
         </button>
       </div>
     </div>
