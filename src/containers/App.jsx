@@ -14,6 +14,7 @@ class App extends Component {
   }
 
   state = {
+    authenticated: false,
     persons: [
       { id: 0, name: 'Max', age: 29 },
       { id: 1, name: 'Ian', age: 30 },
@@ -40,6 +41,10 @@ class App extends Component {
 
   componentDidUpdate() {
     console.log('[App.js] componentDidUpdate');
+  }
+
+  loginHandler = () => {
+    this.setState({ authenticated: true });
   }
 
   deletePersonHandler = (personIndex) => {
@@ -87,6 +92,7 @@ class App extends Component {
           persons={this.state.persons}
           clicked={this.deletePersonHandler}
           changed={this.nameChangedHandler}
+          isAuthenticated={this.state.authenticated}
         />
       );
     }
@@ -101,6 +107,7 @@ class App extends Component {
           texted={this.inputChangedHandler}
           delete={this.charDeleteHandler}
           clicked={this.togglePersonsHandler}
+          login={this.loginHandler}
         />
       );
     }

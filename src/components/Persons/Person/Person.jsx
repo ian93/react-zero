@@ -26,6 +26,7 @@ class Person extends Component {
     console.log('[Person.js] rendering Person');
     return (
       <Aux>
+        {this.props.isAuth ? <p>Authenticated</p> : <p>Please Login</p>}
         <p onClick={this.props.click}>
           I&apos;m&nbsp;
           { this.props.name }
